@@ -12,7 +12,8 @@ services:
     volumes:
       - /etc/munge/munge.key:/etc/munge/munge.key:ro
       - ./conf:/conf:ro
-    command: -x sock:10001 -l /samp.log -c /conf/samp.conf
+      # - ./logs:/var/log # uncomment this for debugging
+    command: -x sock:10001 -l /var/log/samp.log -c /conf/samp.conf
   agg:
     image: ovishpc/ldms-agg
     network_mode: host
@@ -26,4 +27,5 @@ services:
       - ./storage:/storage:rw
       - /etc/munge/munge.key:/etc/munge/munge.key:ro
       - ./conf:/conf:ro
-    command: -x sock:20001 -l /agg.log -c /conf/agg.conf
+      # - ./logs:/var/log # uncomment this for debugging
+    command: -x sock:20001 -l /var/log/agg.log -c /conf/agg.conf
