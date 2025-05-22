@@ -33,4 +33,4 @@ EOF
 envsubst < agg-template.conf > agg.conf
 
 # start ldmsd - keeping it here so docker-stack.yaml is clean
-exec ldmsd ${LDMSD_FLAGS}
+exec ldmsd.sh ${LDMSD_FLAGS}
