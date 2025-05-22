@@ -22,7 +22,7 @@ services:
     depends_on:
       - samp
     volumes:
-      - ./storage:/storage:rw
+      - ./storage:/root/storage:rw
       # - /etc/munge/munge.key:/etc/munge/munge.key:ro # TODO: is this really needed?
       # - ./logs:/var/log # uncomment this for debugging
     deploy:

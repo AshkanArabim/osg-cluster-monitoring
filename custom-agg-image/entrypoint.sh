@@ -1,4 +1,5 @@
 cd /root
+mkdir storage
 
 ## clear / create the file
 echo "" > agg-template.conf
