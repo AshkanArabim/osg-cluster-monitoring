@@ -1,0 +1,33 @@
+services:
+  samp:
+    image: ashkanarabim/ldms-samp-custom:latest
+    environment:
+      - COMPID=1
+      - LDMSD_FLAGS="-x sock:10001 -l /var/log/samp.log -c /conf/samp.conf"
+    # volumes:
+      # - /etc/munge/munge.key:/etc/munge/munge.key:ro # TODO: is this really needed?
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.hostname != ${HOST}
+    entrypoint: bash /root/entrypoint.sh
+  agg:
+    image: ashkanarabim/ldms-agg-custom:latest
+    # TODO: repeat these env vars for samp as well
+    environment:
+      - LDMSD_FLAGS="-x sock:20001 -l /var/log/agg.log -c /conf/agg.conf"
+      - COMPID=2
+      - COMPUTE_NODES=${COMPUTE_NODES}
+    depends_on:
+      - samp
+    volumes:
+      - ./storage:/storage:rw
+      # - /etc/munge/munge.key:/etc/munge/munge.key:ro # TODO: is this really needed?
+      # - ./logs:/var/log # uncomment this for debugging
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.hostname == ${HOST}
+    entrypoint: bash /root/entrypoint.sh
