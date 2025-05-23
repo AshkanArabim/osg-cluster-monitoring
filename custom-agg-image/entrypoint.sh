@@ -1,5 +1,4 @@
 cd /root
-mkdir storage
 
 ## clear / create the file
 echo "" > agg-template.conf
@@ -15,7 +14,7 @@ for i in "${!nodes[@]}"; do
 done
 
 # write rest of the agg config file
-cat <<EOF > agg-template.conf
+cat <<EOF >> agg-template.conf
 # update policies
 updtr_add name=update_all interval=1000000 auto_interval=true
 updtr_prdcr_add name=update_all regex=.*

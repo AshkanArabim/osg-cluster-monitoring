@@ -3,7 +3,7 @@ services:
     image: ashkanarabim/ldms-samp-custom:latest
     environment:
       - COMPID=1
-      - LDMSD_FLAGS=-x sock:10001 -l /var/log/samp.log -c /root/samp.conf
+      - LDMSD_FLAGS=-x sock:10001 -c /root/samp.conf
     # volumes:
       # - /etc/munge/munge.key:/etc/munge/munge.key:ro # TODO: is this really needed?
     deploy:
@@ -16,7 +16,7 @@ services:
     image: ashkanarabim/ldms-agg-custom:latest
     # TODO: repeat these env vars for samp as well
     environment:
-      - LDMSD_FLAGS=-x sock:20001 -l /var/log/agg.log -c /root/agg.conf
+      - LDMSD_FLAGS=-x sock:20001 -c /root/agg.conf
       - COMPID=2
       - COMPUTE_NODES=${COMPUTE_NODES}
     depends_on:
