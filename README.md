@@ -6,5 +6,5 @@
 
 # debugging
 - make a `logs` directory at the root of this repo
-- uncomment the specified lines in `docker-compose.yaml`
+- uncomment the specified lines in `docker-stack.yaml`
 - run the failing container and check its log in `./logs`
