@@ -4,8 +4,6 @@ services:
     environment:
       - COMPID=1
       - LDMSD_FLAGS=-x sock:10001 -c /root/samp.conf
-    # volumes:
-      # - /etc/munge/munge.key:/etc/munge/munge.key:ro # TODO: is this really needed?
     deploy:
       mode: global
       placement:
@@ -14,7 +12,6 @@ services:
     entrypoint: bash /root/entrypoint.sh
   agg:
     image: ashkanarabim/ldms-agg-custom:latest
-    # TODO: repeat these env vars for samp as well
     environment:
       - LDMSD_FLAGS=-x sock:20001 -c /root/agg.conf
       - COMPID=2
@@ -23,8 +20,6 @@ services:
       - samp
     volumes:
       - ./storage:/root/storage:rw
-      # - /etc/munge/munge.key:/etc/munge/munge.key:ro # TODO: is this really needed?
-      # - ./logs:/var/log # uncomment this for debugging
     deploy:
       mode: global
       placement:
