@@ -4,6 +4,10 @@ services:
     environment:
       - COMPID=1
       - LDMSD_FLAGS=-x sock:10001 -c /root/samp.conf
+    ports:
+      - target: 10001
+        published: 10001
+        mode: host
     deploy:
       mode: global
       placement:
@@ -18,6 +22,10 @@ services:
       - COMPUTE_NODES=${COMPUTE_NODES}
     depends_on:
       - samp
+    ports:
+      - target: 20001
+        published: 20001
+        mode: host
     volumes:
       - ./storage:/root/storage:rw
     deploy:
