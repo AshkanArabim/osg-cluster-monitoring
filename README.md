@@ -27,10 +27,12 @@ tweak them. In such a case, be sure to push your images to Docker Hub and modify
       - typically: `docker swarm join --token <token> <aggregator_ip>:<port>`
 - on your aggregator node:
   - `bash setup.sh`
-  - `docker stack deploy --detach=false -c docker-stack.yaml ldms`
     - success is indicated by `verify: Service xxx converged` and your terminal being returned.
   - you can find the monitoring results under `./storage` as they're streamed
-    - NOTE: if you can't access the files under `storage`, use `chmod` to open up the file permissions. Since the LDMS process in the containers runs as root, the generated files are technically owned by root, making them hard to access initially.
+    - NOTE: if you can't access the files under `storage`, 
+      - cd `storage`
+      - `chmod -R 777 ./*` 
+      - Since the LDMS process in the containers runs as root, the generated files are technically owned by root, making them hard to access initially.
 
 ## Teardown
 - on the manager node:
